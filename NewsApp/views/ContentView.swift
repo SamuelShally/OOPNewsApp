@@ -46,7 +46,6 @@ struct ContentView: View{
 struct ViewMain: View {
     private var news = ApiCall()
     @State private var articlesArr: [Artical] = []
-    @State private var selectedTab = 0
     
     private func fetchData(){
         news.getTopHeadlines { [self] articles in
@@ -74,7 +73,8 @@ struct ViewMain: View {
                             .overlay(
                                 
                                 VStack(alignment: .leading){
-                                    Text(article.title ?? "No Headline")
+                                    Text(article.title ?? "No Headline").bold()
+                                    Text(article.source?.name ?? "No source")
                                 }.padding()
                                 
                             )
@@ -91,33 +91,79 @@ struct ViewMain: View {
 }
 
 struct ViewBrief: View{
+    private var news = ApiCall()
+    @State private var articlesArr: [Artical] = []
+    
+    private func fetchData(){
+        news.createBriefing { [self] articles in
+            articlesArr = articles
+            print(articlesArr)
+        }
+    }
+    
     var body: some View {
         NavigationView{
-            VStack {
-                Text("Briefings")
-                
-                
+            //Make the Vstack below scrollable
+            ScrollView{
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    //Display all of the articles pulled from the API
+                    ForEach(articlesArr){ article in
+                        
+                        //Place each article in a rounded rectangle
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
+                            .frame(width: UIScreen.main.bounds.width, height: 200)
+                        
+                        //Overlay is the actual content
+                            .overlay(
+                                
+                                VStack(alignment: .leading){
+                                    Text(article.title ?? "No Headline").bold()
+                                    Text(article.source?.name ?? "No source")
+                                }.padding()
+                                
+                            )
+                    }
+                }
             }
-            .navigationBarTitle("Briefings")
+            .onAppear{
+                fetchData()
+            }
+        
+            .navigationBarTitle("Briefing")
         }
-        }
+    }
 }
 
+
+//Simple Settings page to select the sources to be shown in briefing
 struct ViewSettings: View{
     @State private var wsj: Bool
     @State private var bbc: Bool
+    @State private var cnn: Bool
+    @State private var reuters: Bool
     
     init(){
         self.wsj = UserDefaults.standard.object(forKey: "wsj") as? Bool ?? true
         self.bbc = UserDefaults.standard.object(forKey: "bbc") as? Bool ?? true
-    }
+        self.cnn = UserDefaults.standard.object(forKey: "cnn") as? Bool ?? true
+        self.reuters = UserDefaults.standard.object(forKey: "reuters") as? Bool ?? true
     
+        print(wsj)
+        print(bbc)
+        print(cnn)
+        print(reuters)
+        
+    }
     
     var body: some View {
         
         NavigationView{
             VStack {
                 Text("Customize Briefing Sources: ")
+                    .padding()
                 
                 Toggle("WSJ", isOn: $wsj)
                     .padding()
@@ -125,13 +171,29 @@ struct ViewSettings: View{
                 Toggle("BBC", isOn: $bbc)
                     .padding()
                 
+                Toggle("CNN", isOn: $cnn)
+                    .padding()
+                
+                Toggle("Reuters", isOn: $reuters)
+                    .padding()
+                
+                Spacer()
+                
             }
             .navigationBarTitle("Settings")
+            .onChange(of: wsj) { oldState, newState in
+                UserDefaults.standard.set(newState, forKey: "wsj")
+            }
+            .onChange(of: bbc) { oldState, newState in
+                UserDefaults.standard.set(newState, forKey: "bbc")
+            }
+            .onChange(of: cnn) { oldState, newState in
+                UserDefaults.standard.set(newState, forKey: "cnn")
+            }
+            .onChange(of: reuters) { oldState, newState in
+                UserDefaults.standard.set(newState, forKey: "reuters")
+            }
         }
-    }
-    
-    private func temp(){
-        print("Got here")
     }
 }
 
