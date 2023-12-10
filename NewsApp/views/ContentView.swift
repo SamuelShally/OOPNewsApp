@@ -75,7 +75,14 @@ struct ViewMain: View {
                                 VStack(alignment: .leading){
                                     Text(article.title ?? "No Headline").bold()
                                     Text(article.source?.name ?? "No source")
-                                }.padding()
+                                    Text(toDate(dateStr : article.publishedAt ?? ""))
+                                }
+                                .onTapGesture {
+                                    if let urlString = article.url, let url = URL(string: urlString){
+                                        UIApplication.shared.open(url)
+                                    }
+                                }
+                                .padding()
                                 
                             )
                     }
@@ -86,6 +93,28 @@ struct ViewMain: View {
             }
         
             .navigationBarTitle("Latest Stories")
+        }
+    }
+    
+    //Convert date string to readable date
+    func toDate(dateStr : String) -> String{
+        
+        //slice string to yyyy-mm-dd format
+        let startIndex = dateStr.index(dateStr.startIndex, offsetBy: 0)
+        let endIndex = dateStr.index(dateStr.startIndex, offsetBy: 10)
+        let dateStr = String(dateStr[startIndex..<endIndex])
+        
+        print(dateStr)
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        
+        if let date = format.date(from: dateStr){
+            format.dateFormat = "dd-MM-yyyy"
+            let formattedDate = format.string(from: date)
+            return formattedDate
+        }else{
+            return "No Date"
         }
     }
 }
@@ -122,7 +151,14 @@ struct ViewBrief: View{
                                 VStack(alignment: .leading){
                                     Text(article.title ?? "No Headline").bold()
                                     Text(article.source?.name ?? "No source")
-                                }.padding()
+                                    Text(toDate(dateStr : article.publishedAt ?? ""))
+                                }
+                                .onTapGesture {
+                                    if let urlString = article.url, let url = URL(string: urlString){
+                                        UIApplication.shared.open(url)
+                                    }
+                                }
+                                .padding()
                                 
                             )
                     }
@@ -133,6 +169,28 @@ struct ViewBrief: View{
             }
         
             .navigationBarTitle("Briefing")
+        }
+    }
+    
+    //Convert date string to readable date
+    func toDate(dateStr : String) -> String{
+        
+        //slice string to yyyy-mm-dd format
+        let startIndex = dateStr.index(dateStr.startIndex, offsetBy: 0)
+        let endIndex = dateStr.index(dateStr.startIndex, offsetBy: 10)
+        let dateStr = String(dateStr[startIndex..<endIndex])
+        
+        print(dateStr)
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        
+        if let date = format.date(from: dateStr){
+            format.dateFormat = "dd-MM-yyyy"
+            let formattedDate = format.string(from: date)
+            return formattedDate
+        }else{
+            return "No Date"
         }
     }
 }
