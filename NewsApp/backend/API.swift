@@ -108,8 +108,8 @@ class ApiCall{
             if let data = data {
                 do {
                     
-                    let jsonString = String(data: data, encoding: .utf8)
-                    print("Received JSON: \(jsonString ?? "")")
+//                    let jsonString = String(data: data, encoding: .utf8)
+//                    print("Received JSON: \(jsonString ?? "")")
                     
                     let decoder = JSONDecoder()
                     let articles = try decoder.decode(NewsResponse.self, from: data)

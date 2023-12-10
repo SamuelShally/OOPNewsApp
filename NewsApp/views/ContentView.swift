@@ -25,7 +25,7 @@ struct ContentView: View{
             ViewBrief()
                 .tabItem {
                     Image(systemName: "sun.max.fill")
-                    Text("briefing")
+                    Text("Briefing")
                 }
                 .tag(2)
             
@@ -36,6 +36,7 @@ struct ContentView: View{
                 }
                 .tag(3)
         }
+        
         
     }
     
@@ -104,7 +105,7 @@ struct ViewMain: View {
         let endIndex = dateStr.index(dateStr.startIndex, offsetBy: 10)
         let dateStr = String(dateStr[startIndex..<endIndex])
         
-        print(dateStr)
+//        print(dateStr)
         
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd"
@@ -180,7 +181,7 @@ struct ViewBrief: View{
         let endIndex = dateStr.index(dateStr.startIndex, offsetBy: 10)
         let dateStr = String(dateStr[startIndex..<endIndex])
         
-        print(dateStr)
+//        print(dateStr)
         
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd"
@@ -208,19 +209,13 @@ struct ViewSettings: View{
         self.bbc = UserDefaults.standard.object(forKey: "bbc") as? Bool ?? true
         self.cnn = UserDefaults.standard.object(forKey: "cnn") as? Bool ?? true
         self.reuters = UserDefaults.standard.object(forKey: "reuters") as? Bool ?? true
-    
-        print(wsj)
-        print(bbc)
-        print(cnn)
-        print(reuters)
-        
     }
     
     var body: some View {
         
         NavigationView{
             VStack {
-                Text("Customize Briefing Sources: ")
+                Text("Customize Briefing Sources: (Select At Least One)")
                     .padding()
                 
                 Toggle("WSJ", isOn: $wsj)
