@@ -20,11 +20,24 @@ struct ContentView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 10) {
+                
+                //Display all of the articles pulled from the API
                 ForEach(articlesArr){ article in
-                    VStack(alignment: .leading){
-                        Text(article.title ?? "No Headline")
-                    }
                     
+                    //Place each article in a rounded rectangle
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
+                        .frame(width: UIScreen.main.bounds.width, height: 200)
+                    
+                        //Overlay is the actual content
+                        .overlay(
+                    
+                            VStack(alignment: .leading){
+                                Text(article.title ?? "No Headline")
+                            }.padding()
+                        
+                       )
                 }
                 
             }
