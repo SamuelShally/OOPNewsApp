@@ -34,7 +34,9 @@ struct Artical: Decodable, Identifiable {
 class ApiCall{
     let key = "6365cd421fa94ed29271f9914f3e1df6"
     
-    let topHeadlines = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=6365cd421fa94ed29271f9914f3e1df6"
+    let topHeadlines = "https://newsapi.org/v2/top-headlines?country=us&apiKey=6365cd421fa94ed29271f9914f3e1df6"
+    
+//    let topHeadlines = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=6365cd421fa94ed29271f9914f3e1df6"
     
     //Completion handler will return type artical
     func getTopHeadlines(completionHandler: @escaping ([Artical]) -> Void){

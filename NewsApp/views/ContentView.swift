@@ -18,7 +18,7 @@ struct ContentView: View{
             ViewMain()
                 .tabItem {
                     Image(systemName: "newspaper")
-                    Text("Articles")
+                    Text("Latest")
                 }
                 .tag(1)
             
@@ -92,18 +92,47 @@ struct ViewMain: View {
 
 struct ViewBrief: View{
     var body: some View {
+        NavigationView{
             VStack {
-                Text("Hello, Brief")
+                Text("Briefings")
+                
+                
             }
+            .navigationBarTitle("Briefings")
+        }
         }
 }
 
 struct ViewSettings: View{
+    @State private var wsj: Bool
+    @State private var bbc: Bool
+    
+    init(){
+        self.wsj = UserDefaults.standard.object(forKey: "wsj") as? Bool ?? true
+        self.bbc = UserDefaults.standard.object(forKey: "bbc") as? Bool ?? true
+    }
+    
+    
     var body: some View {
+        
+        NavigationView{
             VStack {
-                Text("Hello, Settings")
+                Text("Customize Briefing Sources: ")
+                
+                Toggle("WSJ", isOn: $wsj)
+                    .padding()
+                
+                Toggle("BBC", isOn: $bbc)
+                    .padding()
+                
             }
+            .navigationBarTitle("Settings")
         }
+    }
+    
+    private func temp(){
+        print("Got here")
+    }
 }
 
 
