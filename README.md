@@ -1,4 +1,4 @@
-###News APP
+### News APP
 
 This project aimed to create an app that removed suggestion algorithms from my news feed. For a long time, I have been irritated by news apps suggesting what they think I want to read rather than what corresponds to the current top stories. 
 
