@@ -14,4 +14,4 @@ In terms of unique requirements, the app is straightforward to use. Some aspects
 
 In conclusion, the project was broadly successful, and I achieved what I had set out to do. 
 
-All diagrams can be found in the attached diagrams.pdf file. 
+All Usecase, Sequence, and class diagrams can be found in the attached diagrams.pdf file. 
