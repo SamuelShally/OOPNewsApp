@@ -1,5 +1,7 @@
 ### News APP
 
+[Link to App](https://apps.apple.com/us/app/shallynews/id6474099927)
+
 This project aimed to create an app that removed suggestion algorithms from my news feed. For a long time, I have been irritated by news apps suggesting what they think I want to read rather than what corresponds to the current top stories. 
 
 In that vein, the goal was to create an app that worked two-fold, showing the latest stories from all sources and a briefing page to narrow down what you see to just your desired sources. 
